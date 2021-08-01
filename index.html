@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+    <head>
+        <title>Narrative Visualization CS498 Data Visualization - Kaushik Murali (kmurali6@illinois.edu)</title>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <link href="d3.css" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    </head>
+<body>
+    <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        The data for the country you chose doesn't exist.
+    </div>
+
+    <!-- Menu section -->
+    <div id="step1" class="container-fluid" style="height:300px">
+        <div>
+            <p>
+				<h1> <center><u>Narrative Visualization on World Happiness Report 2021</u></center></h1>
+                <h1> <center>1. Life Ladder trend in the past 15 years </center></h1>
+                <center>This scene shows the trend of Average Life Ladder(A measure of Happiness).
+				The rankings of national happiness are based on a Cantril ladder survey. 
+				Nationally representative samples of respondents are asked to think of a ladder, with the best possible life for them being a 10, and the worst possible life being a 0.
+				They are then asked to rate their own current lives on that 0 to 10 scale. 
+				This scene shows the trend of Average Life Ladder(A measure of Happiness).
+                As you can see in the plot, the Average Life Ladder has been stable for a decade and has started to increase which implies that people are becoming more happier than before.<br/><br/>
+				<h5><b>This begs the question - What are the best metrics to measure the happiest and the best possible life on the planet?</b></h5><br/>                
+            </p>
+            <p><h5><div id="to_step2"><a href="#">NAVIGATE FURTHER TO LEARN MORE>>></a></div></h5></p>
+        </div>
+    </div>
+
+    <div id="step2" class="container-fluid" style="display:none;height:300px">
+        <div>
+            <p>
+                <center><u><h1>2. A look at the world's happiest country - Finland compared with other developed nations</h1></u>
+                This scene shows the trends of Social Indicators .<br/>
+                1. Freedom to make life choices.<br/>
+				2. Perceptions of corruption in respective countries.<br/>
+				3. Positive effect people think the country has on the world.<br/>
+				If you look at cambodia, social Indicators are high but life ladder is still lower than expected.
+                <b>As you can see, social Indicators alone cannot determine Life Ladder (or Happiness of the people).</b><br/><br/>
+				<h5><b>Could money (Percapita GDP) determine happiness? .</b></h5>
+				</center>
+            </p>
+			<center><h5><p><div id="to_step3"><a href="#">NAVIGATE FURTHER TO LEARN MORE >>></a></div></p></h5></center>
+			
+        </div>
+    </div>
+
+    <div id="step3" class="container-fluid" style="display:none;height:300px">
+        <div>
+            <p>
+                <center><u><h1>3. A look at the world's wealthiest nations</h1></u>
+                This scene shows the world waelthiest nations and their life ladder<br/>
+                We can see that Life Ladder doesnt correlate well with wealth as well<br/><br/>
+				<b>Would a combination of social and economic indicators play a role?</b>	
+				</center>
+            </p>
+            <center><p><div id="to_step4"><a href="#">NAVIGATE FURTHER TO LEARN MORE >>></a></div></p></center>
+        </div>
+    </div>
+
+    <div id="step4" class="container-fluid" style="display:none;height:300px">
+        <div><center>
+            <p>
+                <h1><u>4. A Look at Finland again comapred with other nations - Now with a combination of Social and Economic Indicators</h1></u>
+				Now we can see that countries with the highest freedom to make life choices, high positive effect and high Log GDP percapita are the countries having highest Life Ladder score		
+            </p>
+            <center><p><div id="to_step5"><a href="#">NAVIGATE FURTHER TO LEARN MORE >>></a></div></p></center>
+        </center></div>
+    </div>
+
+    <div id="step5" class="container-fluid" style="display:none;height:300px">
+        <div><center>
+            <p>
+                <h1><u>5. Find out how your country fares!</h1></u>
+                Now it's your turn to find out the metric for your country. You are given an option to query the data directly to World Happiness Report 2021 dataset.
+                <li>You can choose the country you want to query in below select box.</li>
+                <br/>
+                Everytime you select a new country new line chart will be overlapped on existing chart.
+            </p>
+            <p><div id="startover"><a href="#"> Start over </a></div></p>
+        </center></div>
+        <div>
+            <!-- TODO : it's bug and onclick doens't work. Fix it! -->
+            Total <input type="radio" name="type" value="0" checked/>
+            Male <input type="radio" name="type" value="1"/>
+            Female <input type="radio"name="type" value="2"/>
+        </div>            
+        <div id="country_select_container">
+
+        </div>
+    </div>
+    
+    <div class="content">
+        <svg id="chart"></svg>
+    </div>
+    
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+    <script src="load.js" charset="utf-8"></script>
+    <script>
+        draw('WLD', false, 0);
+        draw('WLD', false, 1);
+        draw('WLD', false, 2);
+    </script>
+
+<div class="container-fluid" style="height:50px">
+    <strong style="color:orange">Navy</strong> line is for total average, <strong style="color:blue">blue</strong> is for male, and <strong style="color:red">red</strong> is for female. <br/>
+</div>
+
+<div class="container-fluid">
+    <h4>About the World Happiness Report 2021:</h4>
+    <blockquote>
+            The World Happiness Report is a publication of the United Nations Sustainable Development Solutions Network. It contains articles and rankings of national happiness, based on respondent ratings of their own lives,which the report also correlates with various (quality of) life factors.<br/>
+			<b>Wikipedia -</b> <a href="url">https://en.wikipedia.org/wiki/World_Happiness_Report <br/></a>
+			<b>Report -</b> <a href="url">https://happiness-report.s3.amazonaws.com/2021/WHR+21.pdf <br/></a>
+			<b>Data -</b> <a href="url">https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls <br/></a>
+			
+    </blockquote>
+</div>
+
+</body>
+<!-- any D3 or SVG related code needs to be stay below of D3 inclusion or SVG so that it exists when javascript code try to access it. -->
+
+</html>
