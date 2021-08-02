@@ -5,7 +5,7 @@
 
 .focus circle {
     fill: none;
-    fill: green;
+    fill: black;
 }
 
 .focus text {
@@ -23,25 +23,25 @@
 
 .line {
     fill: none;
-    stroke: green;
+    stroke: black;
     stroke-width: 2px;
 }
 
 path { 
-    stroke: green;
+    stroke: black;
     stroke-width: 2;
     fill: none;
 }
 
 .dot {
-    fill: #000000;
+    fill: #d3d3d3;
     stroke: #fff;
 }
 
-.ticks path {stroke:blue;opacity:0.3} 
+.ticks path {stroke:green;opacity:0.3} 
 
 .content {
     max-width: 800px;
     margin: auto;
-    background-color:whitesmoke;
+    background-color:white;
 }

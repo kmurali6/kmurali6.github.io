@@ -1,10 +1,10 @@
 const yearStart = 2000;
-const yearEnd = 2017;
+const yearEnd = 2019;
 const totalNoOfCountriesToLoad = 400;
 
-const margin = {top: 20, right: 120, bottom: 50, left: 50},
+const margin = {top: 10, right: 120, bottom: 50, left: 50},
     svgWidth = 900,
-    svgHeight = 600,
+    svgHeight = 700,
     width = svgWidth - margin.left - margin.right,
     height = svgHeight - margin.top - margin.bottom;
 
@@ -15,11 +15,11 @@ var floatFormatValue = d3.format(".3n");
 // WDI call type 
 const type = {
     TOTAL: 0,
-    MAILE: 1,
-    FEMAILE: 2
+    MALE: 1,
+    FEMALE: 2
 }
 
-const colors = ["blue","red","yellow","green","black","blue","gray", "lightgray", "orange"];
+const colors = ["blue","red","yellow","green","black","blue","gray", "lightgray", "orange","lightblue","deeppink"];
 
 const chart = d3.select('#chart')
     .attr("width", svgWidth)
@@ -62,9 +62,14 @@ $("#to_step2").click(function() {
     innerChart.selectAll("g").remove();
     hide('#step1');
     show('#step2');    
-    draw("USA", false, 0);
-    draw("USA", false, 1);
     draw("USA", false, 2);
+	draw("CAN", false, 2);
+	draw("AUS", true, 2);
+	draw("DEU", false, 2);
+	draw("NOR", true, 2);
+	draw("SWE", false, 2);
+	draw("GBR", false, 2);
+	draw("WLD", true, 2);
 })
 
 $("#to_step3").click(function() {
@@ -72,9 +77,12 @@ $("#to_step3").click(function() {
     innerChart.selectAll("g").remove();
     hide('#step2');
     show('#step3');
-    draw("CHN", false, 0);
-    draw("CHN", false, 1);
     draw("CHN", false, 2);
+	draw("IND", false, 2);
+	draw("BRA", true, 2);
+	draw("IDN", false, 2);
+	draw("NGA", true, 2);
+	draw("WLD", false, 2);
 })
 
 $("#to_step4").click(function() {
@@ -82,9 +90,22 @@ $("#to_step4").click(function() {
     innerChart.selectAll("g").remove();
     hide('#step3');
     show('#step4');
-    draw("RUS", false, 0);
-    draw("RUS", false, 1);
-    draw("RUS", false, 2);
+    draw("USA", false, 2);
+	draw("CAN", false, 2);
+	draw("AUS", false, 2);
+	draw("DEU", false, 2);
+	draw("NOR", false, 2);
+	draw("SWE", false, 2);
+	draw("GBR", false, 2);
+	draw("WLD", false, 2);
+	draw("USA", false, 1);
+	draw("CAN", false, 1);
+	draw("AUS", false, 1);
+	draw("DEU", false, 1);
+	draw("NOR", false, 1);
+	draw("SWE", false, 1);
+	draw("GBR", false, 1);
+	draw("WLD", false, 1);
 })
 
 $("#to_step5").click(function() {
@@ -94,9 +115,6 @@ $("#to_step5").click(function() {
     loadCountries(addCountriesList);
     show('#step5');
     draw("WLD", true, 0);
-    draw("USA", true, 0);
-    draw("CHN", true, 0);
-    draw("RUS", true, 0);
     
 })
 
@@ -106,9 +124,7 @@ $("#startover").click(function() {
     hide("#country");
     //d3.selectAll("path").remove();
     show("#step1");
-    draw("WLD", false, 0);
-    draw("WLD", false, 1);
-    draw("WLD", false, 2);
+	draw('WLD', true, 2);
 })
 
 $("input[name='type']").click(function() {
@@ -181,13 +197,13 @@ function draw(countryCode, countrylabel, type) {
     console.log("country in draw():", countryCode);
 
     if (type == 0){
-        loadEmploymentByCountryCode(countryCode, "total", drawChart(countryCode, countrylabel, "orange"));
+        loadEmploymentByCountryCode(countryCode, "total", drawChart(countryCode, countrylabel, "lightblue"));
     }
     else if (type == 1){
-        loadEmploymentByCountryCode(countryCode, "male", drawChart(countryCode, countrylabel, "blue"));
+        loadEmploymentByCountryCode(countryCode, "male", drawChart(countryCode, countrylabel, "green"));
     }
     else if (type == 2){
-        loadEmploymentByCountryCode(countryCode, "female", drawChart(countryCode, countrylabel, "red"));
+        loadEmploymentByCountryCode(countryCode, "female", drawChart(countryCode, countrylabel, "deeppink"));
     }
     else {
         console.log("error in draw(), type:", type);
