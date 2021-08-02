@@ -12,7 +12,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     </head>
-<!-- load all country names and then draw World data first -->
 <body style="font-family:'Verdana'">
     <div class="alert alert-warning">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
@@ -92,12 +91,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
     <script src="load2.js" charset="utf-8"></script>
     <script>
-        draw('WLD', true, 2);
+        drawChart('WLD', true, 2);
     </script>
-
-<!-- <div class="container-fluid" style="height:50px">
-    <strong style="color:orange">Orange</strong> line is for total average, <strong style="color:blue">blue</strong> is for male, and <strong style="color:red">red</strong> is for female. <br/>
-</div> -->
 
 <div class="container-fluid">
 	<center>Hover over the grey dots for Tooltips!</center>
@@ -108,8 +103,5 @@
 			This data visualization was developed using the API functionality avaialbe in WDI. Please refer to the link - <a href="url">https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information</a><br/>	
     </blockquote>
 </div>
-
 </body>
-<!-- any D3 or SVG related code needs to be stay below of D3 inclusion or SVG so that it exists when javascript code try to access it. -->
-
 </html>
