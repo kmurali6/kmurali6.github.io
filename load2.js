@@ -1,5 +1,11 @@
 // Declaring all constants
 
+const margin = {top: 10, right: 120, bottom: 50, left: 50},
+    svgWidth = 900,
+    svgHeight = 700,
+    width = svgWidth - margin.left - margin.right,
+    height = svgHeight - margin.top - margin.bottom;
+
 const chart = d3.select('#chart')
     .attr("width", svgWidth)
     .attr("height", svgHeight)
@@ -7,11 +13,6 @@ const chart = d3.select('#chart')
 const innerChart = chart.append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-const margin = {top: 10, right: 120, bottom: 50, left: 50},
-    svgWidth = 900,
-    svgHeight = 700,
-    width = svgWidth - margin.left - margin.right,
-    height = svgHeight - margin.top - margin.bottom;
 
 const colors = ["blue","red","yellow","green","black","blue","gray", "lightgray", "orange","lightblue","deeppink"];
 
