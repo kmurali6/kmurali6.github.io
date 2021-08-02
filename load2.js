@@ -1,8 +1,11 @@
 // Declaring all constants
 
-const StartingYear = 2000;
-const EndingYear = 2019;
-const LoadCapacity = 400;
+const chart = d3.select('#chart')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
+
+const innerChart = chart.append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 const margin = {top: 10, right: 120, bottom: 50, left: 50},
     svgWidth = 900,
@@ -12,19 +15,17 @@ const margin = {top: 10, right: 120, bottom: 50, left: 50},
 
 const colors = ["blue","red","yellow","green","black","blue","gray", "lightgray", "orange","lightblue","deeppink"];
 
-const chart = d3.select('#chart')
-    .attr("width", svgWidth)
-    .attr("height", svgHeight)
-
-const innerChart = chart.append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");	
-
 const type = {
     BOTH: 0,
     MALE: 1,
     FEMALE: 2
-}				
+}
 
+const StartingYear = 2000;
+const EndingYear = 2019;
+const LoadCapacity = 400;
+
+// Declaring all variables
 //var TimeParse = d3.timeParse("%Y");
 var formatValue = d3.format(",");
 var floatFormatValue = d3.format(".3n");
@@ -51,16 +52,13 @@ var g = innerChart
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);    
 
-// get all countries ( BOTH 304 countries so far so setting it to 400 items per page to get all the countries information. #TODO fix it so get page meta first to get "BOTH" and send 2nd query to dynamically change the per_pages number to have "BOTH" values)
-// provide a callback function to execute with loaded data.
+// Declaring all functions
 function loadCountries(callback){
     if (typeof callback !== "function") throw new Error("Wrong callback in loadCountries");
 
     d3.json("https://api.worldbank.org/v2/country?format=json&per_page=" + LoadCapacity).then(callback);
 }
 
-// get a given country's data
-// provide a callback function to execute with loaded data. World BOTH.
 function loadBOTHEmploymentByCountryCode(countryCode, callback){
     d3.json("https://api.worldbank.org/v2/country/" + countryCode + "/indicator/SL.EMP.WORK.ZS?format=json&per_page=60&date=" + StartingYear + ":" + EndingYear)
         .then(callback);
@@ -103,22 +101,22 @@ function drawChart(countryCode, countrylabel, type) {
     console.log("country in drawChart():", countryCode);
 
     if (type == 0){
-        loadEmploymentByCountryCode(countryCode, "BOTH", drawChartChart(countryCode, countrylabel, "lightblue"));
+        loadEmploymentByCountryCode(countryCode, "BOTH", drawCountryChart(countryCode, countrylabel, "lightblue"));
     }
     else if (type == 1){
-        loadEmploymentByCountryCode(countryCode, "male", drawChartChart(countryCode, countrylabel, "green"));
+        loadEmploymentByCountryCode(countryCode, "male", drawCountryChart(countryCode, countrylabel, "green"));
     }
     else if (type == 2){
-        loadEmploymentByCountryCode(countryCode, "female", drawChartChart(countryCode, countrylabel, "deeppink"));
+        loadEmploymentByCountryCode(countryCode, "female", drawCountryChart(countryCode, countrylabel, "deeppink"));
     }
     else {
         console.log("error in drawChart(), type:", type);
     }
 }
 
-function drawChartChart(countryCode, countrylabel, color){
+function drawCountryChart(countryCode, countrylabel, color){
 
-    console.log("Color parameter received in drawChartChart", color);
+    console.log("Color parameter received in drawCountryChart", color);
 
     // done this way to take extra parameter and pass it to the callback.
     return function(data){
